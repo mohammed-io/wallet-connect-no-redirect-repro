@@ -2,4 +2,4 @@
 
 ## Setup
 
-Set `ENV_PROJECT_ID` in `ConfigUtil.ts`.
+Set `EXPO_PUBLIC_PROJECT_ID` in `ConfigUtil.ts`.

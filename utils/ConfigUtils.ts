@@ -1,10 +1,9 @@
-// import {ENV_PROJECT_ID} from '@env';
 import {IProviderMetadata} from '@walletconnect/modal-react-native';
 
-const ENV_PROJECT_ID = ''
+const EXPO_PUBLIC_PROJECT_ID = process.env.EXPO_PUBLIC_PROJECT_ID
 
-if (!ENV_PROJECT_ID) {
-  throw new Error('ENV_PROJECT_ID is not defined')
+if (!EXPO_PUBLIC_PROJECT_ID) {
+  throw new Error('EXPO_PUBLIC_PROJECT_ID is not defined')
 }
 
 const providerMetadata: IProviderMetadata = {
@@ -21,7 +20,7 @@ const sessionParams = {
   namespaces: {
     eip155: {
       methods: ['eth_sendTransaction', 'personal_sign'],
-      chains: ['eip155:1'],
+      chains: ['eip155:137'],
       events: ['chainChanged', 'accountsChanged'],
       rpcMap: {},
     },
@@ -29,7 +28,7 @@ const sessionParams = {
 };
 
 export default {
-  ENV_PROJECT_ID,
+  EXPO_PUBLIC_PROJECT_ID,
   providerMetadata,
   sessionParams,
 };

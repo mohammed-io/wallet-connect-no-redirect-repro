@@ -21,7 +21,7 @@ import {
   PublicClient,
   WalletClient,
 } from 'viem';
-import {mainnet} from 'viem/chains';
+import {polygon} from 'viem/chains';
 
 import ContractUtils from './utils/ContractUtils';
 import ConfigUtils from './utils/ConfigUtils';
@@ -36,7 +36,7 @@ function App(): JSX.Element {
   const walletClient: WalletClient | undefined = useMemo(
     () =>
       createWalletClient({
-        chain: mainnet,
+        chain: polygon,
         transport: custom({
           async request({method, params}) {
             return await provider?.request({method, params});
@@ -49,7 +49,7 @@ function App(): JSX.Element {
   const publicClient: PublicClient | undefined = useMemo(
     () =>
       createPublicClient({
-        chain: mainnet,
+        chain: polygon,
         transport: custom({
           async request({method, params}) {
             return await provider?.request({method, params});
@@ -101,7 +101,7 @@ function App(): JSX.Element {
     const [address] = await walletClient.getAddresses();
 
     const hash = await walletClient.sendTransaction({
-      chain: mainnet,
+      chain: polygon,
       account: address,
       to: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', // vitalik.eth
       value: parseEther('0.001'),
@@ -142,6 +142,8 @@ function App(): JSX.Element {
       functionName: 'totalSupply',
     });
 
+    console.log(data)
+
     return {
       method: 'read contract',
       data,
@@ -162,6 +164,8 @@ function App(): JSX.Element {
       functionName: 'mint',
     });
     const hash = await walletClient?.writeContract(request);
+
+    console.log(hash)
 
     return {
       method: 'write contract',
@@ -216,7 +220,7 @@ function App(): JSX.Element {
         {actionButtonsTemplate()}
       </View>
       <WalletConnectModal
-        projectId={ConfigUtils.ENV_PROJECT_ID}
+        projectId={ConfigUtils.EXPO_PUBLIC_PROJECT_ID}
         providerMetadata={ConfigUtils.providerMetadata}
         sessionParams={ConfigUtils.sessionParams}
         onCopyClipboard={onCopy}
